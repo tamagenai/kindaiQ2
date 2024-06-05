@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>アカンサス実用基礎中国語Q2(第2~9課)</title>
+  <title>アカンサス実用基礎中国語Q2(第4~9課)</title>
   <style>
     .header {
       position: fixed;
@@ -16,6 +16,40 @@
       width: 100%;
 
 
+    }
+
+    .header2 {
+
+      display: flex;
+    }
+
+    .linkurl {
+      margin-left: auto;
+    }
+
+    .Q1 {
+      display: inline-block;
+      width: 60px;
+      height: 40px;
+      cursor: pointer;
+      background-color: skyblue;
+      text-decoration: none;
+      text-align: center;
+      line-height: 50px;
+      border-radius: 6px
+    }
+
+
+    #tangoCard {
+      display: inline-block;
+      width: 60px;
+      height: 40px;
+      cursor: pointer;
+      background-color: pink;
+      text-decoration: none;
+      text-align: center;
+      line-height: 50px;
+      border-radius: 6px
     }
 
     .dataContent {
@@ -56,6 +90,33 @@
     .dataNone {
       display: none;
     }
+    .loading {
+      position: fixed;
+      top: 100px;
+      left: 100px;
+      z-index: 99;
+      content: '';
+      display: block;
+      margin: auto;
+      width: 300px;
+      border: 4px solid #ccc;
+      border-right-color: #0AC;
+      border-radius: 100px;
+      width: 30px;
+      height: 30px;
+      background-color: white;
+      animation: rotation 0.6s linear infinite;
+    }
+
+    @keyframes rotation {
+      from {
+        transform: rotate(0);
+      }
+
+      to {
+        transform: rotate(360deg);
+      }
+    }
 
 
 
@@ -76,8 +137,24 @@
 </head>
 
 <body>
+  <div id="kurukuru" class="loading"></div>
   <div class="header">
-    <h1>アカンサス実用基礎中国語</h1>
+    <div class="header2">
+      <div class="logo">
+        <h3>アカンサス実用基礎中国語Q2(第4~9課)</h3>
+
+      </div>
+      <div class="linkurl">
+        <a class="Q1" href="https://tamagenai.github.io/kindaiQ1/" title="第1課～第3課" target="_blank">Q1</a>
+        <a class="Q1" title="工事中" target="_blank">Q3</a>
+        <a class="Q1" title="工事中" target="_blank">Q4</a>
+        <a id="tangoCard" title="単語カードにジャンプ"
+          href="https://script.google.com/macros/s/AKfycbyGecRtNZskfX1FL-xkVPA-iA-GpoHJz2BwHSD51BxcSmysxAoyxPGYg_nwvBzUqFzj/exec"
+          target="_blank">単語</a>
+
+      </div>
+
+    </div>
     <div class="divFlex">
       <div class="sheetSelect">
 
@@ -135,7 +212,7 @@
     const sheetSelector = document.getElementById("sheet-select");
     classSTOPMP3.style.display = 'none';
     let container = document.getElementById('container');
-
+    let kurukuru = document.getElementById('kurukuru');
     let music = new Audio();
     //  mp3ファイルの再生が完了したときに呼び出される。
     music.addEventListener("ended", () => {
@@ -209,6 +286,7 @@
         createMp3TabAll(sheetDatas);
 
         iniCSSSet();
+        kurukuru.remove();
       }).fail((error) => {  // 失敗した時の処理
         alert('Error:' + JSON.stringify(error));
 
@@ -245,7 +323,7 @@
           tr = document.createElement('tr');
           let mphjKubun;
           for (let k = 0; k < sheetDatas[i][j].length - 1; k++) {
-            
+
             if (k === 1) {
               mphjKubun = sheetDatas[i][j][1];
 
@@ -256,7 +334,7 @@
                 td.setAttribute('onclick', 'speakMp3(this)');
                 td.setAttribute('class', 'clkBtn');
                 td.style.backgroundColor = "#fffacd";
-                
+
               } else if (mphjKubun === 'h') {
                 td.setAttribute('onclick', 'speakData(this)');
                 td.setAttribute('class', 'clkBtn');
@@ -267,7 +345,7 @@
               }
 
             }
-            
+
             tr.appendChild(td);
 
           }
@@ -296,7 +374,7 @@
         } else {
           tdOLD.style.backgroundColor = tdOLDColor;
           tdOLD = param1;
-          
+
         }
         //2023/04/27 追加　背景色
 
